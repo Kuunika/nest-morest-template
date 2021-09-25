@@ -1,13 +1,14 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
+import helmet from 'helmet';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { API_MONGODB_URI } from './common/constants';
 import { LogModule } from './log/log.module';
 import { HealthController } from './health/health.controller';
-import { TerminusModule } from '@nestjs/terminus';
-import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -26,4 +27,8 @@ import { HttpModule } from '@nestjs/axios';
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(helmet()).forRoutes('*');
+  }
+}
