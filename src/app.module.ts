@@ -5,6 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { API_MONGODB_URI } from './common/constants';
 import { LogModule } from './log/log.module';
+import { HealthController } from './health/health.controller';
+import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -17,8 +20,10 @@ import { LogModule } from './log/log.module';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     LogModule,
+    TerminusModule,
+    HttpModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}
