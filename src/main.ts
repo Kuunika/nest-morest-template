@@ -15,6 +15,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix(PREFIX);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle(APP_NAME)
