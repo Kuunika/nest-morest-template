@@ -37,3 +37,11 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Docker
+
+```bash
+# first update the uri to refer to the db container
+# use the command below to bring up the setup
+$ docker-compose up
+```
